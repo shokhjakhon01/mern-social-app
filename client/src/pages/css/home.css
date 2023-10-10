@@ -1,0 +1,41 @@
+.home{
+	width: 100%;
+	min-height: 100vh;
+	background-color: #555;
+	/* margin-top: 45px; */
+}
+
+.post__items{
+	display: grid;
+	grid-template-columns: 70% 30%;
+	width: 100%;
+	min-height: 100vh;
+}
+
+.left__side{
+	min-height: 90vh;
+	padding: 20px 15%;
+}
+
+.right__side{
+	min-height: 90vh;
+	padding: 20px 15%;
+	width: 100%;
+}
+
+.postedBy{
+	padding: 10px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+
+}
+
+@media (max-width: 768px) {
+	.post__items{
+		grid-template-columns: 100%;
+	}	
+	.right__side{
+		display: none;
+	}
+}
+
