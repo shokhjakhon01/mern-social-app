@@ -56,6 +56,10 @@ body {
   width: 100%;
 }
 
+.info-profile p{
+  margin: 0 10px;
+}
+
 .gallery {
   display:grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -120,4 +124,15 @@ body {
 
 .card-image{
   max-height: 400px;
+}
+
+.commentPost{
+  height: 100%;
+  align-items: center;
+  display: flex;
+  width: 90%;
+  border: 1px solid teal;
+  justify-content: space-between;
+  padding: 10px;
+  margin-top: 5px;
 }

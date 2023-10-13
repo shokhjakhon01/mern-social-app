@@ -7,6 +7,7 @@ import { NewPost } from "./pages/NewPost";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { reducer, initialState } from './reducers/userReducer';
 import { useHistory } from "react-router-dom";
+import { UserProfile } from "./pages/UserProfile";
 
 export const UserContext = createContext();
 
@@ -17,7 +18,6 @@ const Routing = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       dispatch({ type: "USER", payload: user });
-      history.push('/');
     } else {
       history.push('/login');
     }
@@ -39,9 +39,13 @@ const Routing = () => {
         component={Profile}
       />
       <Route
-        exact
         path="/createpost"
         component={NewPost}
+      />
+      <Route
+        exact
+        path="/profile/:userId"
+        component={UserProfile}
       />
 
     </Switch>

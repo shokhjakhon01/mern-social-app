@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function HomeSideBar() {
 	const [data, setData] = useState([]);
+	const history = useHistory();
 	const token = localStorage.getItem("token");
 	useEffect(() => {
 		fetch("http://localhost:8000/myPost", {
@@ -10,7 +12,12 @@ export default function HomeSideBar() {
 				"Content-type": "application/json",
 				token: token
 			}
-		}).then((response) => response.json()).then(data => setData(data.data));
+		}).then((response) => response.json()).then(data => {
+			if (data.message == 'Unauthorized') {
+				history.push('/login');
+			}
+			setData(data.data);
+		});
 	}, []);
 
 	return (
@@ -18,7 +25,7 @@ export default function HomeSideBar() {
 			{data.map(item => (
 				<div className="card" key={item._id}>
 					<div className="card-image">
-						<img src={item.photo} alt="ii" />
+						<img style={{ height: 300, width: '100%' }} src={item.photo} alt="ii" />
 					</div>
 					<div className="card-content">
 						<p className="card-title postedBy">{item.postedBy.name}</p>

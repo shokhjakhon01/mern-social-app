@@ -45,23 +45,26 @@ export const Navbar = () => {
     }
   };
   return (
-    <div className="navBar">
-      <div className="navigationBar">
-        <div className="mainPage">
-          <Link
-            to={state ? '/' : '/login'}
-            className="brand-logo"
-          >
-            ShohGram
-          </Link>
-        </div>
-        <div className="navLink">
-          <ul>
-            {renderNav()}
-          </ul>
+    <>
+      <div className="navBar">
+        <div className="navigationBar">
+          <div className="mainPage">
+            <Link
+              to={state ? '/' : '/login'}
+              className="brand-logo"
+            >
+              ShohGram
+            </Link>
+          </div>
+          <div className="navLink">
+            <ul>
+              {renderNav()}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+      <div style={{ marginTop: "10vh" }}></div>
+    </>
 
   );
 };

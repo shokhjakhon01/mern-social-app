@@ -19,6 +19,14 @@ const PostSchema = new Schema({
       ref: "users",
     }
   ],
+  comments: [
+    {
+      text: String,
+      postedBy: {
+        type: ObjectId,
+        ref: "Users",
+      }
+    }],
   postedBy: {
     type: ObjectId,
     ref: "Users",

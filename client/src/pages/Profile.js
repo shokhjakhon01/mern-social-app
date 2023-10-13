@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../App";
 
 export const Profile = () => {
   const [data, setData] = useState([]);
+  const { state, dispatch } = useContext(UserContext);
   const token = localStorage.getItem("token");
   useEffect(() => {
     fetch("http://localhost:8000/myPost", {
@@ -24,7 +26,7 @@ export const Profile = () => {
           />
         </div>
         <div>
-          <h4 style={{ color: 'white' }}>Suyunov Shohjahon</h4>
+          <h4 style={{ color: 'white' }}>{state?.name}</h4>
           <div className="info-profile">
             <p style={{ color: 'white' }}>99 posts</p>
             <p style={{ color: 'white' }}>99 followers</p>
@@ -32,7 +34,7 @@ export const Profile = () => {
           </div>
         </div>
       </div>
-      <div className="gallery">
+      {data.length ? <div className="gallery">
         {data.map(item => (
           <div className="image-item">
             <img
@@ -41,7 +43,8 @@ export const Profile = () => {
             />
           </div>
         ))}
-      </div>
+      </div> : <p> No Post</p>}
+
     </div>
   );
 };

@@ -25,7 +25,8 @@ export default {
     }
   },
   getAllPosts: async (req, res) => {
-    const posts = await Post.find().populate("postedBy", "_id, name");
+    const posts = await Post.find().populate("postedBy", "_id, name").populate("comments.postedBy", "_id name");
+
     res.status(200).json({
       status: 200,
       message: "Posts fetched successfully",
@@ -77,6 +78,38 @@ export default {
       });
     } catch (error) {
       res.status(500).json({ error: error });
+    }
+  },
+  commentToPost: async (req, res) => {
+    const comment = {
+      text: req.body.text,
+      postedBy: req.user._id,
+    };
+    const posts = await Post.findByIdAndUpdate(req.body._id, { $push: { comments: comment } }, { new: true })
+      .populate("comments.postedBy", '_id name').populate("postedBy", '_id, name')
+      .exec((err, result) => {
+        if (err) {
+          return res.status(422).json({ error: err });
+        } else {
+          res.status(200).json({ data: result });
+        }
+      });
+  },
+  deleteMyPost: async (req, res) => {
+    try {
+      const post = await Post.findOne({ _id: req.params.postId }).populate("postedBy", '_id');
+      if (!post) {
+        return res.status(404).json({ error: "Post not found" });
+      }
+
+      if (post.postedBy._id.toString() !== req.user._id.toString()) {
+        return res.status(403).json({ error: "You cannot delete another post" });
+      }
+      await post.remove();
+      res.status(200).json({ data: post });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Internal server error" });
     }
   },
 };

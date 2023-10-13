@@ -9,5 +9,7 @@ router.get("/getAllPost", protect, postController.getAllPosts);
 router.get("/myPost", protect, postController.getmyPosts);
 router.put("/like", protect, postController.likePosts);
 router.put("/unlike", protect, postController.unLikePosts);
+router.put("/comments", protect, postController.commentToPost);
+router.delete("/deletePost/:postId", protect, postController.deleteMyPost);
 
 export default router;
