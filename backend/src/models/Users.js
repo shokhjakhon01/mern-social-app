@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose"
-
+import { Schema, model } from "mongoose";
+const { ObjectId } = Schema.Types;
 const UserSchema = new Schema({
   name: {
     type: String,
@@ -13,8 +13,20 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-})
+  followers: [
+    {
+      type: ObjectId,
+      ref: "User",
+    }
+  ],
+  following: [
+    {
+      type: ObjectId,
+      ref: "User",
+    }
+  ]
+});
 
-const User = model("Users", UserSchema)
+const User = model("Users", UserSchema);
 
-export default User
+export default User;

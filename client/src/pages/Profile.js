@@ -28,9 +28,9 @@ export const Profile = () => {
         <div>
           <h4 style={{ color: 'white' }}>{state?.name}</h4>
           <div className="info-profile">
-            <p style={{ color: 'white' }}>99 posts</p>
-            <p style={{ color: 'white' }}>99 followers</p>
-            <p style={{ color: 'white' }}>99 folllowing</p>
+            <p style={{ color: 'white' }}>{data.length} posts</p>
+            <p style={{ color: 'white' }}>{state ? state?.followers?.length : 0} followers</p>
+            <p style={{ color: 'white' }}>{state ? state?.following?.length : 0} folllowing</p>
           </div>
         </div>
       </div>

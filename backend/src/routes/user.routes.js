@@ -5,5 +5,7 @@ import protect from "../middlewares/protect.js";
 const router = Router();
 
 router.get("/user/:id", protect, userController.getSingleUser);
+router.put("/follow", protect, userController.followers);
+router.put("/unfollow", protect, userController.unfollowers);
 
 export default router;
