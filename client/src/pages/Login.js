@@ -12,8 +12,28 @@ export const Login = () => {
   const [regPassword, setRegpassword] = useState("");
   const [logEmail, setLogEmail] = useState("");
   const [logPassword, setLogPassword] = useState("");
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [image, setImage] = useState("");
+  const [url, setUrl] = useState(undefined);
   const histroy = useHistory();
   const { state, dispatch } = useContext(UserContext);
+
+  const uploadUserImageHandler = () => {
+    const formdata = new FormData();
+    formdata.append("file", image);
+    formdata.append("upload_preset", "shohgram");
+    formdata.append("cloud_name", "dmecr8ega");
+
+    fetch("https://api.cloudinary.com/v1_1/dmecr8ega/image/upload", {
+      method: "POST",
+      body: formdata,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUrl(data.url);
+      })
+      .catch((error) => console.log(error));
+  };
 
   const postData = (e) => {
     e.preventDefault();
@@ -36,6 +56,7 @@ export const Login = () => {
         name: regName,
         email: regEmail,
         password: regPassword,
+        photo: url
       }),
     })
       .then((res) => res.json())
@@ -98,12 +119,19 @@ export const Login = () => {
       });
   };
 
+  useEffect(() => {
+    if (url) {
+      uploadUserImageHandler();
+    }
+  }, [url]);
+
   return (
     <div className={clicked ? "containerr sign-up-mode" : "containerr"}>
       <div className="forms-container">
         <div className="signin-signup">
           <form className="sign-in-form">
             <h2 className="title">Sign in</h2>
+
             <div className="input-fields">
               <i className="fas fa-user"></i>
               <input
@@ -160,6 +188,14 @@ export const Login = () => {
           </form>
           <form className="sign-up-form">
             <h2 className="title">Sign up</h2>
+            <div class="containers">
+              <img src="https://e7.pngegg.com/pngimages/84/165/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper-thumbnail.png" alt="Avatar" class="images" />
+              <div class="middles">
+                <button type="button" onClick={() => setIsOpenModal(!isOpenModal)} className="btn">
+                  <i className="material-icons">add_a_photo</i>
+                </button>
+              </div>
+            </div>
             <div className="input-fields">
               <i className="fas fa-user"></i>
               <input
@@ -269,6 +305,53 @@ export const Login = () => {
           />
         </div>
       </div>
+      {isOpenModal ? (
+        <div className="modalS" onClick={() => setIsOpenModal(false)}>
+          <div
+            className="modalS__content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="modalHeader">
+              <h4>Add Your Accaunt Photo</h4>
+              <i
+                style={{ cursor: "pointer", color: "#0d47a1", position: 'absolute' }}
+                onClick={() => setIsOpenModal(false)}
+                className="small material-icons xicon"
+              >
+                close
+              </i>
+            </div>
+            <div className="modalConten">
+              <div class="file-field input-field">
+                <div class="btn #0d47a1 blue darken-4">
+                  <span>
+                    <i className="material-icons">add_a_photo</i>
+                  </span>
+                  <input
+                    type="file"
+                    onChange={(e) => setImage(e.target.files[0])}
+                  />
+                </div>
+                <div class="file-path-wrapper">
+                  <input
+                    class="file-path validate"
+                    type="text"
+                    placeholder="You Photo"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="modalFooter">
+              <button
+                className="btn #0d47a1 blue darken-4"
+                onClick={() => setIsOpenModal(false)}
+              >
+                Save Image
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

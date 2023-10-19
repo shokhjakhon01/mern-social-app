@@ -45,4 +45,13 @@ export default {
 			return res.status(500).json({ error: "Internal server error" });
 		}
 	},
+	getSubscribePosts: async (req, res) => {
+		try {
+			const post = await Post.find({ postedBy: { $in: req.user.following } }).populate('postedBy', "_id name").populate("comments.postedBy", "_id name");
+
+			return res.status(200).json({ data: post });
+		} catch (error) {
+			return res.status(500).json({ error: "Internal server error" });
+		}
+	},
 };

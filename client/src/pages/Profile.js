@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../App";
+import { Link } from "react-router-dom";
 
 export const Profile = () => {
   const [data, setData] = useState([]);
@@ -21,7 +22,7 @@ export const Profile = () => {
         <div>
           <img
             className="profile-img"
-            src="https://images.unsplash.com/photo-1494959764136-6be9eb3c261e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+            src={state?.photo}
             alt="profile avatar"
           />
         </div>
@@ -30,7 +31,9 @@ export const Profile = () => {
           <div className="info-profile">
             <p style={{ color: 'white' }}>{data.length} posts</p>
             <p style={{ color: 'white' }}>{state ? state?.followers?.length : 0} followers</p>
-            <p style={{ color: 'white' }}>{state ? state?.following?.length : 0} folllowing</p>
+            <Link to='/myFollowerPost'>
+              <p style={{ color: 'white' }}>{state ? state?.following?.length : 0} folllowing</p>
+            </Link>
           </div>
         </div>
       </div>

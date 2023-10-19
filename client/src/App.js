@@ -8,9 +8,9 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { reducer, initialState } from './reducers/userReducer';
 import { useHistory } from "react-router-dom";
 import { UserProfile } from "./pages/UserProfile";
+import { SubscribeUserPost } from "./pages/SubscribeUserPost";
 
 export const UserContext = createContext();
-
 const Routing = () => {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
@@ -46,6 +46,10 @@ const Routing = () => {
         exact
         path="/profile/:userId"
         component={UserProfile}
+      />
+      <Route
+        path="/myFollowerPost"
+        component={SubscribeUserPost}
       />
 
     </Switch>

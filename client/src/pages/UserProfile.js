@@ -34,7 +34,6 @@ export const UserProfile = () => {
 			})
 		}).then((response) => response.json())
 			.then(result => {
-				console.log(result.userFollowing);
 				dispatch({ type: "UPDATE", payload: { followers: result.userFollowing.followers, following: result.userFollowing.following } });
 				localStorage.setItem("user", JSON.stringify(result.userFollowing));
 				setData((prev) => {

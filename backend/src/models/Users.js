@@ -13,6 +13,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  photo: {
+    type: String,
+    default: "https://e7.pngegg.com/pngimages/84/165/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper-thumbnail.png"
+  },
   followers: [
     {
       type: ObjectId,
