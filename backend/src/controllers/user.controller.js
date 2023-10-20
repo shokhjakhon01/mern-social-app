@@ -54,4 +54,7 @@ export default {
 			return res.status(500).json({ error: "Internal server error" });
 		}
 	},
+	updatePhoto: async (req, res) => {
+		const user = await User.findByIdAndUpdate(req.user._id, { $set: { photo: req.body.photo } }, { new: true });
+	},
 };

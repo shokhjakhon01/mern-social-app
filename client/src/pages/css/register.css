@@ -420,6 +420,10 @@ form.sign-in-form {
   text-align: center;
 }
 
+.middles2{
+  left: 100%;
+}
+
 .containers:hover .images {
   opacity: 0.3;
 }

@@ -35,8 +35,7 @@ export const Login = () => {
       .catch((error) => console.log(error));
   };
 
-  const postData = (e) => {
-    e.preventDefault();
+  const ourFields = () => {
     if (
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         regEmail
@@ -63,7 +62,7 @@ export const Login = () => {
       .then((data) => {
         if (data.token) {
           localStorage.setItem("token", data.token);
-          localStorage.setItem("user", data.data);
+          localStorage.setItem("user", JSON.stringify(data.data));
           dispatch({ type: "USER", payload: data.data });
         }
         if (data.status === 422) {
@@ -76,6 +75,15 @@ export const Login = () => {
           histroy.push("/");
         }
       });
+  };
+
+  const postData = (e) => {
+    e.preventDefault();
+    if (image) {
+      uploadUserImageHandler();
+    } else {
+      ourFields();
+    }
   };
 
   const loginData = (e) => {
@@ -121,7 +129,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (url) {
-      uploadUserImageHandler();
+      ourFields();
     }
   }, [url]);
 
