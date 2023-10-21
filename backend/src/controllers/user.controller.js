@@ -55,6 +55,28 @@ export default {
 		}
 	},
 	updatePhoto: async (req, res) => {
-		const user = await User.findByIdAndUpdate(req.user._id, { $set: { photo: req.body.photo } }, { new: true });
+		try {
+			const user = await User.findByIdAndUpdate(req.user._id, { $set: { photo: req.body.photo } }, { new: true });
+			if (!user) {
+				return res.status(404).json({ error: "Picture dont upload" });
+			}
+
+			return res.status(200).json({ user });
+		} catch (error) {
+			return res.status(500).json({ error: "Internal server error" });
+		}
 	},
+	updateName: async (req, res) => {
+		try {
+			const user = await User.findByIdAndUpdate(req.user._id, { $set: { name: req.body.name } }, { new: true });
+
+			if (!user) {
+				return res.status(404).json({ error: "Photo dont update" });
+			}
+
+			return res.status(200).json({ user });
+		} catch (error) {
+			return res.status(500).json({ error: "Internal server error" });
+		}
+	}
 };

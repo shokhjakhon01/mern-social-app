@@ -8,6 +8,7 @@ router.get("/user/:id", protect, userController.getSingleUser);
 router.put("/follow", protect, userController.followers);
 router.put("/unfollow", protect, userController.unfollowers);
 router.put("/updatephoto", protect, userController.updatePhoto);
+router.put("/updatename", protect, userController.updateName);
 router.get("/getSubspost", protect, userController.getSubscribePosts);
 
 export default router;

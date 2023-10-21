@@ -137,3 +137,16 @@ body {
   padding: 10px;
   margin-top: 5px;
 }
+
+.profileName{
+  height: 5rem;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.profileName button{
+  width: 50px;
+  margin-left: 1rem;
+  margin-top: 10px;
+}
