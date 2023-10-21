@@ -78,5 +78,12 @@ export default {
 		} catch (error) {
 			return res.status(500).json({ error: "Internal server error" });
 		}
-	}
+	},
+	searchUser: async (req, res) => {
+		try {
+			const searchPanel = new RegExp("^" + req.body.search);
+		} catch (error) {
+			return res.status(500).json({ error: "Internal server error" });
+		}
+	},
 };

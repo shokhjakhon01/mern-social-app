@@ -117,8 +117,8 @@ export const Profile = () => {
         </div>
       </div>
       {data.length ? <div className="gallery">
-        {data.map(item => (
-          <div className="image-item">
+        {data.map((item, i) => (
+          <div key={i} className="image-item">
             <img
               src={item.photo}
               alt={item._id}
