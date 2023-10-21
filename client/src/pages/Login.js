@@ -196,9 +196,9 @@ export const Login = () => {
           </form>
           <form className="sign-up-form">
             <h2 className="title">Sign up</h2>
-            <div class="containers">
-              <img src="https://e7.pngegg.com/pngimages/84/165/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper-thumbnail.png" alt="Avatar" class="images" />
-              <div class="middles">
+            <div className="containers">
+              <img src="https://e7.pngegg.com/pngimages/84/165/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper-thumbnail.png" alt="Avatar" className="images" />
+              <div className="middles">
                 <button type="button" onClick={() => setIsOpenModal(!isOpenModal)} className="btn">
                   <i className="material-icons">add_a_photo</i>
                 </button>

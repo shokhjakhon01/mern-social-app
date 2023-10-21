@@ -81,7 +81,12 @@ export default {
 	},
 	searchUser: async (req, res) => {
 		try {
-			const searchPanel = new RegExp("^" + req.body.search);
+			const searchPanel = new RegExp("^" + req.body.query);
+			const user = await User.find({ email: { $regex: searchPanel } }).select("_id name email photo");
+			if (!user) {
+				return res.status(422).json({ error: "Not Found" });
+			}
+			return res.status(200).json({ user });
 		} catch (error) {
 			return res.status(500).json({ error: "Internal server error" });
 		}

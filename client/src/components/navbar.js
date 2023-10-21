@@ -8,16 +8,34 @@ import M from "materialize-css";
 export const Navbar = () => {
   const searchPanel = useRef(null);
   const [searchUser, setSearchUser] = useState('');
+  const [userSearchFinded, setUserSearchFinded] = useState([]);
   const { state, dispatch } = useContext(UserContext);
   const history = useHistory();
+
   const logout = () => {
     localStorage.clear();
     dispatch({ type: "CLEAR" });
     history.push('/login');
   };
+
   useEffect(() => {
     M.Modal.init(searchPanel.current);
   }, []);
+
+  const searchUsersHandler = (query) => {
+    setSearchUser(query);
+    fetch('http://localhost:8000/search', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ query })
+    })
+      .then(response => response.json())
+      .then((result) => setUserSearchFinded(result.user))
+      .catch((error) => console.log(error));
+  };
+
   const renderNav = () => {
     if (state) {
       return [
@@ -76,23 +94,25 @@ export const Navbar = () => {
               <i class="material-icons prefix">search</i>
               <input id="icon_prefix" type="text" class="validate"
                 value={searchUser}
-                onChange={(e) => setSearchUser(e.target.value)} />
-              <label for="icon_prefix">Search</label>
+                onChange={(e) => searchUsersHandler(e.target.value)} />
+              <label htmlFor="icon_prefix">Search</label>
             </div>
             <div>
               <ul className="collection">
-                <li class="collection-item avatar">
-                  <img src="images/yuna.jpg" alt="" class="circle" />
-                  <span class="title">Title</span>
-                  <p>First Line <br />
-                    Second Line
-                  </p>
-                </li>
+                {userSearchFinded.map(user => (
+                  <Link onClick={() => M.Modal.getInstance(searchPanel.current).close()}
+                    to={user?._id === state?._id ? `/profile` : '/profile/' + user?._id}>
+                    <li key={user._id} class="collection-item avatar">
+                      <img src={user?.photo} alt="" class="circle" />
+                      <span class="title">{user?.name} <br /> {user?.email}</span>
+                    </li>
+                  </Link>
+                ))}
               </ul>
             </div>
           </div>
           <div className="modal-footer">
-            <button className="modal-close waves-effect waves-green btn-flat">Close</button>
+            <button onClick={(e) => setSearchUser('')} className="modal-close waves-effect waves-green btn-flat">Close</button>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ export const SignUp = () => {
             value={title}
             onChange={(e) => settitle(e.target.value)}
           />
-          <label for="name">Name</label>
+          <label htmlFor="name">Name</label>
         </div>
         <div className="input-field col s6">
           <i className="material-icons prefix">email</i>
@@ -26,7 +26,7 @@ export const SignUp = () => {
             value={title}
             onChange={(e) => settitle(e.target.value)}
           />
-          <label for="icon_prefix">Email</label>
+          <label htmlFor="icon_prefix">Email</label>
         </div>
         <div className="input-field col s6">
           <i className="material-icons prefix">password</i>
@@ -35,7 +35,7 @@ export const SignUp = () => {
             type="password"
             className="validate"
           />
-          <label for="password">Password</label>
+          <label htmlFor="password">Password</label>
         </div>
         <button className="waves-effect waves-light btn #1565c0 blue darken-3">
           Sign up

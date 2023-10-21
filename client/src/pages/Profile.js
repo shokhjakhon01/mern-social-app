@@ -89,9 +89,9 @@ export const Profile = () => {
     <div className="profile">
       <div className="profileMain">
         <div>
-          <div class="containers">
-            <img src={state?.photo} alt="Avatar" class="profile-img" />
-            <div class="middles middles2">
+          <div className="containers">
+            <img src={state?.photo} alt="Avatar" className="profile-img" />
+            <div className="middles middles2">
               <button type="button"
                 onClick={() => setIsOpenModal(true)}
                 className="btn">
@@ -191,8 +191,8 @@ export const Profile = () => {
               </i>
             </div>
             <div className="modalConten">
-              <div class="file-field input-field">
-                <div class="btn #0d47a1 blue darken-4">
+              <div className="file-field input-field">
+                <div className="btn #0d47a1 blue darken-4">
                   <span>
                     <i className="material-icons">add_a_photo</i>
                   </span>
@@ -201,19 +201,19 @@ export const Profile = () => {
                     onChange={(e) => updatePhotoHandler(e.target.files[0])}
                   />
                 </div>
-                <div class="file-path-wrapper">
+                <div className="file-path-wrapper">
                   <input
-                    class="file-path validate"
+                    className="file-path validate"
                     type="text"
                     placeholder="You Photo"
                   />
                 </div>
               </div>
-              <div class="input-field col s6">
-                <i class="material-icons prefix">account_circle</i>
-                <input id="icon_prefix" type="text" class="validate"
+              <div className="input-field col s6">
+                <i className="material-icons prefix">account_circle</i>
+                <input id="icon_prefix" type="text" className="validate"
                   onChange={(e) => setName(e.target.value)} />
-                <label for="icon_prefix">First Name</label>
+                <label htmlFor="icon_prefix">First Name</label>
               </div>
             </div>
             <div className="modalFooter">
